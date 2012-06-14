@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html class="ui-mobile">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><base href=".">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>MobiArt</title> 
+	  	<script type="text/javascript" charset="utf-8" src="./lib/main.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css">
+		<script src="./lib/js/jquery-1.7.1.min.js"></script>
+		<script src="./lib/js/jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+		<script src="http://vjs.zencdn.net/c/video.js"></script>
+		<style>
+			.fit-content, .bottom-footer {
+				position : absolute;
+			}
+
+			.fit-content {
+				top : 44px;
+				bottom : 44px;
+				left : 0;
+				right : 0;
+			}
+
+			.fit-content > div {
+				height : 100%;
+			}
+
+			.bottom-footer {
+				bottom : 0;
+				width : 100%;
+			}
+
+			.yellow-bg {
+				background-color: yellow;
+			}
+		</style>
+		<script type="text/javascript">
+		<!-- Google Maps -->
+			$(function(){
+				$("#google-maps-example").one('pageshow',function(){
+					var map = new google.maps.Map($("#map-container").get(0), {
+					zoom: 18,
+					center: new google.maps.LatLng(51.5105, -0.1330),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+					});
+					
+					$(this).on('pageshow',function(){
+					google.maps.event.trigger(map, 'resize');
+					});
+					});
+				});
+			});
+		</script>
+		<link href="./lib/jquery-mobile.css" type="text/css" rel="stylesheet" />
+		<link href="./lib/photoswipe.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="./lib/klass.min.js"></script>
+		<script type="text/javascript" src="./lib/code.photoswipe.jquery-3.0.4.min.js"></script>
+		<script type="text/javascript"> 
+		<!-- PhotoSwipe -->
+			/*
+			 * IMPORTANT!!!
+			 * REMEMBER TO ADD  rel="external"  to your anchor tags. 
+			 * If you don't this will mess with how jQuery Mobile works
+			 */
+			(function(window, $, PhotoSwipe){
+				$(document).ready(function(){
+					$('div.gallery-page')
+						.live('pageshow', function(e){
+							var 
+								currentPage = $(e.target),
+								options = {},
+								photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+								
+							return true;
+						})
+						.live('pagehide', function(e){
+							var 
+								currentPage = $(e.target),
+								photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+							if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+								PhotoSwipe.detatch(photoSwipeInstance);
+							}
+							return true;
+						});
+				});
+			}(window, window.jQuery, window.Code.PhotoSwipe));
+		</script>
+		
+		<script src="./jquery.slickwrap.js" type="text/javascript"></script>
+        <style type="text/css">
+            .wrapReady {
+                float: left;
+            }
+        </style>
+        <script type="text/javascript" charset="UTF-8">
+            $(document).ready(function(){
+                $('.wrapReady').slickWrap();
+            });
+        </script>	
+	</head> 
+		
+	<body class="ui-mobile-viewport ui-overlay-c"> 
+		<!-- Start of Artist List page: #home -->
+		<div data-role="page" id="home" data-url="one" tabindex="0" class="ui-page ui-body-c ui-page-active" style="min-height: 667px; ">
+			<div data-role="header" class="ui-header ui-bar-a" role="banner">
+				<h1 class="ui-title" role="heading" aria-level="1">MobiArt</h1>
+			</div><!-- /header -->
+			<div data-role="content" class="ui-content" role="main">	
+				<h2>MobiArt - art to the masses.</h2>
+				
+				<p>Allowing the next wave of young creative artists an always open Gallery on the go.</p>	
+			</div>
+			<div data-role="content2">
+				<ul data-role="listview" data-inset="true">	
+					<li><a href="#lArtist" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Artist</span></span></a></li>	
+					<li><a href="#lExhibt" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Exhibts</span></span></a></li>	
+					<li><a href="#google-maps-example" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Local Exhibts</span></span></a></li>	
+					<li><a href="#lVideotwo" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Intro Video</span></span></a></li>
+					<li><a href="#pGeoRafa" data-role="button" data-rel="dialog" data-transition="pop" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Georafa</span></span></a></li>
+					<li><a href="#pArtistT" data-role="button" data-rel="dialog" data-transition="pop" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">"popup Artist"</span></span></a></li>
+					<li><a href="#pExhibtT" data-role="button" data-rel="dialog" data-transition="pop" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">"popup Exhibt"</span></span></a></li>
+				</ul>
+			</div><!-- /content -->
+			<div data-role="footer" data-theme="d" class="ui-footer ui-bar-d" role="contentinfo">
+				<h4 class="ui-title" role="heading" aria-level="1">Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page home -->
+
+		<!-- Start of Artist List page: #lArtist -->
+		<div data-role="page" id="lArtist" data-theme="a">
+			<div data-role="header">
+				<h1>Artist</h1>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="a">	
+				<div class="ui-content" data-role="content" role="main">
+					<div class="content-primary">
+						<ul class="ui-listview" data-role="listview">
+							<li class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+										<a class="ui-link-inherit" href="#pArtistF">
+											<img class="ui-li-thumb" src="./lib/images/lucianPhotocrop.jpg">
+											<h3 class="ui-li-heading">Lucian Freud  b.1922 d.2011</h3>
+											<p class="ui-li-desc">Nationality: - British</p>
+											<p class="ui-li-desc">Style: - Realism</p>
+										</a>
+							</li>
+							<li class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+										<a class="ui-link-inherit" href="#pArtistT">
+											<img class="ui-li-thumb" src="./lib/images/SelfPortrait.jpg">
+											<h3 class="ui-li-heading">William Turner</h3>
+											<p class="ui-li-desc">Nationality : England</p>
+											<p class="ui-li-desc">Style: - Seascapes</p>
+										</a> 
+									<span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+							</li>
+							<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+										<a class="ui-link-inherit" href="#pArtistD">
+											<img class="ui-li-thumb" src="./lib/images/Leonardo_selfcrop.jpg">
+											<h3 class="ui-li-heading">Leonardo DiVinci</h3>
+											<p class="ui-li-desc">Nationality : Italian</p>
+											<p class="ui-li-desc">Style: - Court Portraits</p>
+										</a>
+									<span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+							</li>
+							<li class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c"></li>
+						</ul>
+					</div>
+				</div>
+			</div><!-- /content -->		
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="bottom">
+						<ul>
+							<li><a href="#home" data-icon="alert">Home</a></li>
+							<li><a href="#lArtist" data-icon="alert">Artist</a></li>
+							<li><a href="#lExhibt" data-icon="alert">Exhibt's</a></li>
+							<li><a href="#google-maps-example" data-icon="alert">Near Me</a></li>
+						</ul>
+					</div><!-- /navbar -->
+					<p class="alt">
+						For more information, visit our full site at
+						<a class="ui-link" href="#" data-ajax="false">GEOrafa.com</a>
+					</p>
+			</div><!-- /footer -->
+		</div><!-- /page art -->
+
+		<!-- Start of Exhibitions listing page: #lExhibit -->
+		<div data-role="page" id="lExhibt" data-theme="a">
+			<div data-role="header">
+				<h1>Exhibitions</h1>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="a">	
+				<h2>Currently live :</h2>
+				<div class="ui-content" data-role="content" role="main">
+					<div class="content-primary">
+						<ul class="ui-listview" data-role="listview">
+							<li class="ui-btn ui-btn-icon-right ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+										<a class="ui-link-inherit" href="#pExhibitF">
+											<img class="ui-li-thumb" src="./lib/images/lucianPstr.jpg">
+											<h3 class="ui-li-heading">Lucian Freud : Portraits</h3>
+											<p class="ui-li-desc">National Portrait Gallery</p>
+											<p class="ui-li-desc">5th Jan 2012 - 5th May 2012</p>
+										</a>
+									<span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+							</li>
+							<li class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+								<a class="ui-link-inherit" href="#Exhibit1">
+											<img class="ui-li-thumb" src="./lib/images/postercrop.jpg">
+											<h3 class="ui-li-heading">A painter in the court of Milan</h3>
+											<p class="ui-li-desc">National Gallery</p>
+											<p class="ui-li-desc">5th Jan 2012 - 5th May 2012</p>
+										</a>
+									<span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+							</li>
+							<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
+							<a class="ui-link-inherit" href="#pExhibtT">
+											<img class="ui-li-thumb" src="./lib/images/posterTurnercrop.jpg">
+											<h3 class="ui-li-heading">In the light of Claude</h3>
+											<p class="ui-li-desc">National Gallery</p>
+											<p class="ui-li-desc">14th March 2002 - 5th June 2002</p>
+										</a>				
+									<span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+							</li>
+							<li class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb" data-corners="false" data-shadow="false" data-iconshadow="true" data-inline="false" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c"></li>
+						</ul>
+					</div>
+				</div>	
+			</div><!-- /content -->	
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="bottom">
+						<ul>
+							<li><a href="#home" data-icon="alert">Home</a></li>
+							<li><a href="#art" data-icon="alert">Artist</a></li>
+							<li><a href="#exh" data-icon="alert">Exhib's</a></li>
+							<li><a href="#loc" data-icon="alert">Near Me</a></li>
+						</ul>
+					</div><!-- /navbar -->
+					<p class="alt">
+						For more information, visit our full site at
+						<a class="ui-link" href="#" data-ajax="false">GEOrafa.com</a>
+					</p>
+			</div><!-- /footer -->
+		</div><!-- /page exhibitions -->
+		<!-- google maps example -->
+		<div data-role="page" id="google-maps-example">
+			<div data-role="header">
+				<a href="#home" data-rel="back" data-icon="back">Home</a>
+				<h1>Google Maps</h1>
+			</div>
+			<div data-role="content" class="fit-content">
+				<div id="map-container" class="yellow-bg"></div>
+			</div>
+			<div data-role="footer" class="bottom-footer">
+				<h4>Page Footer</h4>
+			</div>
+		</div>
+
+		<!-- The Sample Video -->
+		<div data-role="page" data-add-back-btn="true" id="lVideotwo" >
+			<div data-role="header">
+				<h1>First Mobile Video</h1>
+				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+			</div>
+			<div data-role="content">	
+				<iframe class="youtube-player" type="text/html" width="320" height="190" src="http://www.youtube.com/v/S60AZyI4XVE" frameborder="0">
+				</iframe>
+			</div>
+			<div data-role="footer">
+				<h4>&copy; 2012 Spanarchian Design</h4>
+			</div>
+		</div>	
+		
+		
+		<!-- The Sample Galleries -->
+		<div data-role="page" data-add-back-btn="true" id="Gallery1" class="gallery-page">
+			<div data-role="header">
+				<h1>First Gallery</h1>
+			</div>
+			<div data-role="content">	
+				<ul class="gallery">
+					<li><a href="./lib/images/full/001.jpg" rel="external" data-related-url="./lib/images/full/heron.jpg"><img src="./lib/images/thumb/001.jpg" alt="Image 001" /></a></li>
+					<li><a href="./lib/images/full/002.jpg" rel="external"><img src="./lib/images/thumb/002.jpg" alt="Image 002" /></a></li>
+					<li><a href="./lib/images/full/003.jpg" rel="external"><img src="./lib/images/thumb/003.jpg" alt="Image 003" /></a></li>
+					<li><a href="./lib/images/full/004.jpg" rel="external"><img src="./lib/images/thumb/004.jpg" alt="Image 004" /></a></li>
+					<li><a href="./lib/images/full/005.jpg" rel="external"><img src="./lib/images/thumb/005.jpg" alt="Image 005" /></a></li>
+					<li><a href="./lib/images/full/006.jpg" rel="external"><img src="./lib/images/thumb/006.jpg" alt="Image 006" /></a></li>
+					<li><a href="./lib/images/full/007.jpg" rel="external"><img src="./lib/images/thumb/007.jpg" alt="Image 007" /></a></li>
+					<li><a href="./lib/images/full/008.jpg" rel="external"><img src="./lib/images/thumb/008.jpg" alt="Image 008" /></a></li>
+					<li><a href="./lib/images/full/009.jpg" rel="external"><img src="./lib/images/thumb/009.jpg" alt="Image 009" /></a></li>
+				</ul>
+			</div>
+			<div data-role="footer">
+				<h4>&copy; 2012 Spanarchian Design</h4>
+			</div>
+		</div>
+		<!-- The Sample Galleries - Lucian Freud -->
+		<div data-role="page" data-add-back-btn="true" id="GalleryF" class="gallery-page">
+			<div data-role="header">
+				<h1>Exhibit Portfolio</h1>
+			</div>
+			<div data-role="content">	
+				<ul class="gallery">
+					<li><a href="./lib/images/lucian/pic1.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic1.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic2.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic2.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic3.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic3.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic4.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic4.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic5.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic5.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic6.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic6.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic7.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic7.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/lucian/pic8.jpg" rel="external"><img src="./lib/images/lucian/thumb/pic8.jpg" alt="Image 010" /></a></li>
+				</ul>
+			</div>
+			<div data-role="footer">
+				<h4>&copy; 2012 Spanarchian Design</h4>
+			</div>
+		</div>
+		<!-- The Sample Galleries - William Turner -->
+		<div data-role="page" data-add-back-btn="true" id="GalleryT" class="gallery-page">
+			<div data-role="header">
+				<h1>Exhibit Portfolio</h1>
+			</div>
+			<div data-role="content">	
+				<ul class="gallery">
+					<li><a href="./lib/images/turner/pic1.jpg" rel="external" data-related-url="./lib/images/full/heron.jpg"><img src="./lib/images/turner/thumb/pic1.jpg" alt="Title" /></a></li>
+					<li><a href="./lib/images/turner/pic2.jpg" rel="external"><img src="./lib/images/turner/thumb/pic2.jpg" alt="Title" /></a></li>
+					<li><a href="./lib/images/turner/pic3.jpg" rel="external"><img src="./lib/images/turner/thumb/pic3.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic4.jpg" rel="external"><img src="./lib/images/turner/thumb/pic4.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic5.jpg" rel="external"><img src="./lib/images/turner/thumb/pic5.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic6.jpg" rel="external"><img src="./lib/images/turner/thumb/pic6.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic7.jpg" rel="external"><img src="./lib/images/turner/thumb/pic7.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic8.jpg" rel="external"><img src="./lib/images/turner/thumb/pic8.jpg" alt="Image 010" /></a></li>
+					<li><a href="./lib/images/turner/pic9.jpg" rel="external"><img src="./lib/images/turner/thumb/pic9.jpg" alt="Image 010" /></a></li>
+				</ul>
+			</div>
+			<div data-role="footer">
+				<a href="#pArtistT" >Artist</a>
+				<h4>&copy; 2012 Spanarchian Design</h4>
+				<a href="#GalleryT" >Sample Portfolio</a>
+			</div>
+		</div>
+
+		<!-- XXXX PopUps -->
+		<!-- Start of GeoRafa: #pGeoRafa -->
+		<div data-role="page" id="pGeoRafa" data-url="popup" data-fullscreen="true">
+			<div data-role="header"  data-theme="e">
+				<h1>GeoRafa</h1>
+				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="d">	
+				<h2>Real Art for All</h2>
+				<p>For the promotion and accessibility of Student and Social art projects to a wider audience.
+					<h3>For More Information</h3>
+					<p>Visit <a href="http://www.spanarchian.co.uk" title="Link will open in a new window" target="_blank">http://www.spanarchian.co.uk<img width="16" height="11" alt="" src="http://vlstatic.com/images/icons/external-links.gif"></a></p><p> or call +44 (0)20 7907 7073 for more information.</p>
+				</p>	
+			</div><!-- /content -->
+			<div data-role="footer">
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page #pGeoRafa-->
+		
+		
+		<!-- Start of GeoRafa: #pArtist -->
+		<div data-role="page" id="pArtistT" data-url="popup" data-fullscreen="true" >
+			<div data-role="header"  data-theme="e">
+				<h1>Artist Profile</h1>
+				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="d">	
+				<h2>Name : William Turner</h2>
+				<img src ="./lib/images/SelfPortrait.jpg"  width="60" class="wrapReady"/>
+			<p>Joseph Mallord William Turner RA (23 April 1775 – 19 December 1851) was an English Romantic landscape painter, watercolourist and printmaker. Turner was considered a controversial figure in his day, but is now regarded as the artist who elevated landscape painting to an eminence rivaling history painting.[1] Although renowned for his oil paintings, Turner is also one of the greatest masters of British watercolour landscape painting. He is commonly known as "the painter of light"[2] and his work is regarded as a Romantic preface to Impressionism.</a></p>	
+			</div><!-- /content -->
+			<div data-role="footer">
+				<a href="#pExhibtT" >Exhibt</a>
+				<a href="#GalleryT" >Portfolio</a>
+			</div><!-- /footer -->
+		</div><!-- /page #pArtist-->
+		<!-- Start of popup Exhibt: #pExhibt -->
+		<div data-role="page" id="pExhibtT" data-url="popup" data-fullscreen="true">
+		<div data-role="header"  data-theme="e">
+			<h1>Exhibt Profile</h1>
+			<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		</div><!-- /header -->
+		<div data-role="content" data-theme="d">	
+			<h2>Title : In the light of Claude</h2>
+			<img src ="./lib/images/posterTurner.jpg" width="120"  class="wrapReady" />
+			<p>Turner created a revolution in painting at the beginning of the 19th century, responding to a modern industrial landscape with a freer style and new approaches to composition. Yet a lasting dialogue with the 17th century painter Claude lay at the heart of these developments.
+
+	This exhibition offers the chance to compare closely related works by Turner and Claude and discover the extent to which Turner was inspired by Claude's mastery of light and landscape.</p>
+			<p>reference to the bottom links to the Artist Profile / Sample of Works.</p>
+
+		  <div class="panel-middle cf">
+			<h3>Prices:</h3>
+				<table class="data nb">
+					<tbody>
+						<tr>
+						  <th>Adult Ticket:</th>
+							<td>
+								  From £12.00 per ticket
+							</td>
+						</tr>
+						<tr>
+						  <th>Child Ticket: </th>
+							<td>
+								  Up to £8.00 per ticket
+							</td>
+						</tr>
+						<tr>
+						  <th>Concession Ticket:</th>
+							<td>
+								  Up to £8.00 per ticket
+						  </td>
+						</tr>
+						<tr>
+						  <th>Senior Ticket:</th>
+							<td>
+								From £10.00 per ticket
+							</td>
+						</tr>
+					  </tbody>
+				</table>
+				<h4>For More Information:</h4>
+				<p>Visit <a href="http://www.spanarchian.co.uk" title="Link will open in a new window" target="_blank">http://www.spanarchian.co.uk<img width="16" height="11" alt="" src="http://vlstatic.com/images/icons/external-links.gif"></a><br> or call +44 (0)20 7907 7073 for more information.</p>
+			</div>
+		</div><!-- /content -->
+		<div data-role="footer">
+			<a href="#pArtistT" >Artist</a>
+			<a href="#GalleryT" >Sample Portfolio</a>
+		</div><!-- /footer -->
+	</div><!-- /page #pExhibt-->
+	
+			<div data-role="page" id="pArtistF" data-url="popup" data-fullscreen="true" >
+			<div data-role="header"  data-theme="e">
+				<h1>Artist Profile</h1>
+				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="d">	
+				<h2>Name : Lucian Freud</h2>
+				<img src ="./lib/images/lucianPhotocrop.jpg"  width="60" class="wrapReady"/>
+			<p>Lucian Michael Freud(8 December 1922 � 20 July 2011) was a German-born British painter. Known chiefly for his thickly impastoed portrait and figure paintings, he was widely considered the pre-eminent British artist of his time. His works are noted for their psychological penetration, and for their often discomforting examination of the relationship between artist and model.</p>	
+			</div><!-- /content -->
+			<div data-role="footer">
+				<a href="#pExhibtF" >Exhibt</a>
+				<a href="#GalleryF" >Portfolio</a>
+			</div><!-- /footer -->
+		</div><!-- /page #pArtist-->
+		
+		<!-- Start of popup Exhibt: #pExhibt -->
+		<div data-role="page" id="pExhibtF" data-url="popup" data-fullscreen="true">
+		<div data-role="header"  data-theme="e">
+			<h1>Exhibt Profile</h1>
+			<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		</div><!-- /header -->
+		<div data-role="content" data-theme="d">	
+			<h2>Title : Portraits</h2>
+			<img src ="./lib/images/lucianPstr.jpg" width="120"  class="wrapReady" />
+			<p>These paintings of people were central to his work and this major exhibition, spanning over seventy years, is the first to focus on his portraiture.
+
+Produced in close collaboration with the late Lucian Freud, this exhibition concentrates on particular periods and groups of sitters which illustrate Freud's stylistic development and technical virtuosity. Insightful paintings of the artist's lovers, friends and family, referred to by the artist as the 'people in my life', will demonstrate the psychological drama and unrelenting observational intensity of his work.
+
+Featuring 130 works from museums and private collections throughout the world, some of which have never been seen before, this is an unmissable opportunity to experience the work of one of the world's greatest artists.</p>
+			<p>reference to the bottom links to the Artist Profile / Sample of Works.</p>
+
+		  <div class="panel-middle cf">
+			<h3>Prices:</h3>
+				<table class="data nb">
+					<tbody>
+						<tr>
+						  <th>Adult Ticket:</th>
+							<td>
+								  From £20.00 per ticket
+							</td>
+						</tr>
+						<tr>
+						  <th>Child Ticket: </th>
+							<td>
+								  Up to £8.00 per ticket
+							</td>
+						</tr>
+						<tr>
+						  <th>Concession Ticket:</th>
+							<td>
+								  Up to £10.00 per ticket
+						  </td>
+						</tr>
+						<tr>
+						  <th>Senior Ticket:</th>
+							<td>
+								From £15.00 per ticket
+							</td>
+						</tr>
+					  </tbody>
+				</table>
+				<h4>For More Information:</h4>
+				<p>Visit <a href="http://www.spanarchian.co.uk" title="Link will open in a new window" target="_blank">http://www.spanarchian.co.uk<img width="16" height="11" alt="" src="http://vlstatic.com/images/icons/external-links.gif"></a><br> or call +44 (0)20 7907 7073 for more information.</p>
+			</div>
+		</div><!-- /content -->
+		<div data-role="footer">
+			<a href="#pArtistF" >Artist</a>
+			<a href="#GalleryF" >Sample Portfolio</a>
+		</div><!-- /footer -->
+	</div><!-- /page #pExhibt-->
+	
+		<!-- Start of popup Shop: #pShop -->
+		<div data-role="page" id="pShop" data-url="popup" data-fullscreen="true">
+			<div data-role="header"  data-theme="e">
+				<h1>Sales Page :</h1>
+				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="d">	
+				<div class="panel-middle cf">
+				<h3>Prices:</h3>
+					<table class="data nb">
+						<tbody>
+							<tr>
+							  <th>Poster</th>
+								<td>
+									  From £12.00 per ticket
+								</td>
+							</tr>
+							<tr>
+							  <th>Framed Poster: </th>
+								<td>
+									  Up to £20.00 
+								</td>
+							</tr>
+							<tr>
+							  <th>Canvas Print:</th>
+								<td>
+									  Up to £18.00 
+							  </td>
+							</tr>
+							<tr>
+							  <th>Framed Canvas:</th>
+								<td>
+									From £30.00 
+								</td>
+							</tr>
+						  </tbody>
+					</table>
+					<h4>For More Information:</h4>
+					<p>Visit <a href="http://www.spanarchian.co.uk" title="Link will open in a new window" target="_blank">http://www.spanarchian.co.uk<img width="16" height="11" alt="" src="http://vlstatic.com/images/icons/external-links.gif"></a><br> or call +44 (0)20 7907 7073 for more information.</p>
+				</div>
+			</div><!-- /content -->
+			<div data-role="footer">
+				<h4>Footer</h4>
+			</div><!-- /footer -->
+		</div><!-- /page #pShop-->
+	</body>
+</html>

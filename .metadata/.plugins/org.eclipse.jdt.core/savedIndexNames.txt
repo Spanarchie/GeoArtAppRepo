@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\mobile\WSpace\spanarchian\.metadata\.plugins\org.eclipse.jdt.core
+4100943988.index
+623920596.index
+1791378482.index
